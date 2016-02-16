@@ -1,50 +1,49 @@
-hj(function (){
+﻿(function(){
   "use strict";
 
-   var Moosipurk = function(){
 
-     //SINGLETON PATTERN
-   if(Moosipurk.instance){
+  var Moosipurk = function(){
 
-       return Moosipurk.instance;
-     }
+    // SINGLETON PATTERN (4 rida)
+    if(Moosipurk.instance){
+      return Moosipurk.instance;
+    }
+    Moosipurk.instance = this; // this viitab moosipurgile
 
-Moosipurk.instance = this; // this viitab Moosipurgile
+    console.log(this);
+    //console.log('moosipurgi sees');
 
-       console.log(this);
-  //   console.log('Moosipurgi sees');
-
- //Koik muutujad mis on uldiselt
- this.click_count = 0;
-
-  //panen rakenduse toole
-    this.event;
-   };
-
-//koik moosipurgi finktsioonid tulevad siia sisse
-Moosipurk.prototype = {
-        init: function (){
-          console.log("Rakendus kaivitus");
-          //hakkkame kuulama hiireklopse
-        //  this.bindMouseEvents();
-
-        },
-        bindMouseEvent: function (){
-          //querySelector - saadab kätte nuppu
-          document.querySelector(".add-new-jar").addEventListener("click", this.addNewClick.bind(this));
-        },
-        addNewClick: function (event){
-          console.log(event);
-
-          this.click_count++;
-          console.log(this.click_count);
-        }
-};
+    // KÕIK MUUTUJAD, mis on üldised ja muudetavad
+    this.click_count = 0;
 
 
- window.onload = function(){
-    var app = new Moosipurk;
 
- };
+    //panen rakenduse tööle
+    this.init();
+  };
+
+  //kõik moosipurgi funktsioonid tulevad siia sisse
+  Moosipurk.prototype = {
+    init: function(){
+      console.log('rakendus käivitus');
+      // Siia tuleb esialgne loogika
+      // hakka kuulama hiireklõpse
+      this.bindMouseEvents();
+    },
+    bindMouseEvents: function(){
+      document.querySelector('.add-new-jar').addEventListener('click', this.addNewClick.bind(this));
+    },
+    addNewClick: function(event){
+      //console.log(event);
+      this.click_count++;
+      console.log(this.click_count);
+
+    }
+  };
+
+
+  window.onload = function(){
+    var app = new Moosipurk();
+  };
 
 })();
